@@ -27,6 +27,7 @@
 @property UITextSpellCheckingType spellCheckingType;
 @property UIKeyboardAppearance keyboardAppearance;
 @property UIKeyboardType keyboardType;
+@property UITextContentType textContentType;
 @property UIReturnKeyType returnKeyType;
 @property BOOL enablesReturnKeyAutomatically;
 @property (getter=isSecureTextEntry) BOOL secureTextEntry;
@@ -195,6 +196,7 @@
         textView.autocorrectionType             = self->_textInputTraits.autocorrectionType;
         textView.spellCheckingType              = self->_textInputTraits.spellCheckingType;
         textView.keyboardType                   = self->_textInputTraits.keyboardType;
+        textView.textContentType                = self->_textInputTraits.textContentType;
         textView.keyboardAppearance             = self->_textInputTraits.keyboardAppearance;
         textView.returnKeyType                  = self->_textInputTraits.returnKeyType;
         textView.enablesReturnKeyAutomatically  = self->_textInputTraits.enablesReturnKeyAutomatically;
@@ -643,6 +645,27 @@
     return [self.textInputTraits keyboardType];
   }
 }
+
+- (void)setTextContentType:(UITextContentType)textContentType
+{
+  AS::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    [self.textView setTextContentType:textContentType];
+  } else {
+    [self.textInputTraits setTextContentType:textContentType];
+  }
+}
+
+- (UITextContentType)textContentType
+{
+  AS::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    return [self.textView textContentType];
+  } else {
+    return [self.textInputTraits textContentType];
+  }
+}
+
 
 - (void)setReturnKeyType:(UIReturnKeyType)returnKeyType
 {
