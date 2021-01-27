@@ -41,7 +41,7 @@ static ASTipDisplayBlock _Nullable __tipDisplayBlock;
 + (ASTipDisplayBlock)tipDisplayBlock
 {
   return __tipDisplayBlock ?: ^(ASDisplayNode *node, NSString *string) {
-    NSLog(@"%@. Node ancestry: %@", string, node.ancestryDescription);
+    NSLog(@"[%@] %@. Node ancestry: %@", node.debugName, string, node.ancestryDescription);
   };
 }
 
