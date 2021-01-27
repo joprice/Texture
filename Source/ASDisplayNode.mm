@@ -34,6 +34,9 @@
 #import <AsyncDisplayKit/ASSignpost.h>
 #import <AsyncDisplayKit/ASWeakProxy.h>
 #import <AsyncDisplayKit/ASResponderChainEnumerator.h>
+#if AS_ENABLE_TIPS
+#import <AsyncDisplayKit/ASTipsController.h>
+#endif
 
 // Conditionally time these scopes to our debug ivars (only exist in debug/profile builds)
 #if TIME_DISPLAYNODE_OPS
